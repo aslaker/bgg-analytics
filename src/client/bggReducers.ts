@@ -40,6 +40,10 @@ export const bggGameReducer = (
   const metadata = gameResponse.link || null;
   return {
     id: gameResponse.$.id,
+    rank:
+      gameResponse.statistics[0]?.ratings[0]?.ranks[0]?.rank.find(
+        (item) => item.$.type === "subtype"
+      )?.$.value ?? "",
     name:
       gameResponse.name?.find((name) => name.$.type === "primary")?.$.value ??
       "",

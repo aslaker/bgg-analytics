@@ -37,18 +37,18 @@ export type Rating = {
         bayesaverage: string;
         friendlyname: string;
         id: string;
-        name: string;
-        type: string;
+        name: "boardgame" | string;
+        type: "subtype" | "family";
         value: string;
-      }
+      };
     }[];
-  };
+  }[];
   stddev: StandardValue[];
   trading: StandardValue[];
   usersrated: StandardValue[];
   wanting: StandardValue[];
   wishing: StandardValue[];
-}
+};
 
 export type HotnessResponse = {
   $: {
@@ -66,6 +66,26 @@ export type BggResponseBody = {
   };
 };
 
+export type Family = {
+  id: number;
+  rank: number;
+  name: string;
+};
+
+export type Statistics = {
+  average: number;
+  averageweight: number;
+  bayesaverage: number;
+  median: number;
+  numcomments: number;
+  owned: number;
+  stddev: number;
+  trading: number;
+  usersrated: number;
+  wanting: number;
+  wishing: number;
+};
+
 export type BggGameResponse = {
   $: {
     id: string;
@@ -77,20 +97,24 @@ export type BggGameResponse = {
   description: string[];
   excerpt: string[];
   image: string[];
+  thumbnail: string[];
   yearpublished: StandardValue[];
   link?: ParsedLink[];
-  // statistics: { ratings: }[]
+  statistics: { ratings: Rating[] }[];
 };
 
 export type ProcessedGame = {
-  id: string;
-  name: string;
-  playerCountMin: string | null;
-  playerCountMax: string | null;
-  totalPlayTime: string | null;
+  id: number | null;
+  name: string | null;
+  overallRank: number | null;
+  familyRanks: Family[] | null;
+  playerCountMin: number | null;
+  playerCountMax: number | null;
+  totalPlayTime: number | null;
   description: string | null;
   excerpt: string | null;
   image: string | null;
+  thumbnail: string | null;
   yearPublished: string | null;
   mechanics: ProcessedLink[] | null;
   categories: ProcessedLink[] | null;
@@ -101,4 +125,5 @@ export type ProcessedGame = {
   integrations: ProcessedLink[] | null;
   accessories: ProcessedLink[] | null;
   families: ProcessedLink[] | null;
+  statistics: Statistics;
 };

@@ -3,6 +3,10 @@
     {
       "path": "/api/updateTop100Games",
       "schedule": "0 23 * * *"
+    },
+    {
+      "path": "/api/updateMechanics",
+      "schedule": "0 23 15 1-12 *"
     }
   ]
 }

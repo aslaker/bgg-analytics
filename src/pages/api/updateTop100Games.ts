@@ -3,8 +3,8 @@ import * as cheerio from "cheerio";
 import { bggClient } from "../../client/bgg";
 import axios from "axios";
 import * as xml2js from "xml2js";
-import { bggGameReducer } from "../../client/bggReducers";
 import { type BggResponseBody } from "../../types/types";
+import { transformGameResponse } from "../../helpers/transformers";
 
 async function parse(xmlData: string) {
   const promise = await new Promise((resolve, reject) => {
@@ -51,7 +51,6 @@ const handler: NextApiHandler = async (req, res) => {
     });
 
     const endpoint = `/thing?type=boardgame&stats=1&id=${games
-      .slice(0, 6)
       .map((game) => game.bggId)
       .join(",")}`;
 
@@ -59,10 +58,8 @@ const handler: NextApiHandler = async (req, res) => {
 
     const parsedJson = (await parse(bggResponse.data)) as BggResponseBody;
 
-    debugger;
-
     const processedResponse = parsedJson.items.item.map((item) => {
-      return bggGameReducer(item);
+      return transformGameResponse(item);
     });
 
     res.status(200).json(processedResponse);
