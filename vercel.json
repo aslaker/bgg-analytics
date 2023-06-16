@@ -1,0 +1,8 @@
+// {
+//   "crons": [
+//     {
+//       "path": "/api/updateTop100Games",
+//       "schedule": "0 23 * * *"
+//     }
+//   ]
+// }
