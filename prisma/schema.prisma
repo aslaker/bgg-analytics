@@ -12,18 +12,35 @@ datasource db {
 }
 
 model Game {
-  id             Int        @id @default(autoincrement())
-  rank           Int
+  id             Int         @id @default(autoincrement())
   bggId          String
+  overallRank    Int
   name           String
+  description    String?
   image          String?
+  thumbnail      String?
   playerCountMin Int?
   playerCountMax Int?
   yearPublished  String?
   totalPlayTime  String?
+  familyRanks    Family[]
   mechanics      Mechanic[]
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
+  categories     Category[]
+  designers      Designer[]
+  artists        Artist[]
+  publishers     Publisher[]
+  expansions     Expansion[]
+  statistics     Statistics?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model Family {
+  id    Int    @id @default(autoincrement())
+  bggId String @unique
+  name  String
+  rank  Int
+  Game  Game[]
 }
 
 model Mechanic {
@@ -31,4 +48,56 @@ model Mechanic {
   bggId String @unique
   name  String
   Game  Game[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  bggId String @unique
+  name  String
+  Game  Game[]
+}
+
+model Designer {
+  id    Int    @id @default(autoincrement())
+  bggId String @unique
+  name  String
+  game  Game[]
+}
+
+model Artist {
+  id    Int    @id @default(autoincrement())
+  bggId String @unique
+  name  String
+  game  Game[]
+}
+
+model Publisher {
+  id    Int    @id @default(autoincrement())
+  bggId String @unique
+  name  String
+  game  Game[]
+}
+
+model Expansion {
+  id    Int    @id @default(autoincrement())
+  bggId String @unique
+  name  String
+  game  Game[]
+}
+
+model Statistics {
+  id            Int  @id @default(autoincrement())
+  average       Int
+  averageweight Int
+  bayesaverage  Int
+  median        Int
+  numcomments   Int
+  owned         Int
+  stddev        Int
+  trading       Int
+  usersrated    Int
+  wanting       Int
+  wishing       Int
+  game          Game @relation(fields: [gameId], references: [id])
+  gameId        Int  @unique
 }

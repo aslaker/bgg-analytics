@@ -112,7 +112,6 @@ export type ProcessedGame = {
   playerCountMax: number | null;
   totalPlayTime: number | null;
   description: string | null;
-  excerpt: string | null;
   image: string | null;
   thumbnail: string | null;
   yearPublished: string | null;
@@ -122,8 +121,5 @@ export type ProcessedGame = {
   artists: ProcessedLink[] | null;
   publishers: ProcessedLink[] | null;
   expansions: ProcessedLink[] | null;
-  integrations: ProcessedLink[] | null;
-  accessories: ProcessedLink[] | null;
-  families: ProcessedLink[] | null;
   statistics: Statistics;
 };

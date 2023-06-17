@@ -19,7 +19,6 @@ export function transformGameResponse(
     playerCountMax: getPlayerCountMax(gameResponse),
     totalPlayTime: getTotalPlayTime(gameResponse),
     description: gameResponse.description[0] ?? null,
-    excerpt: getExcerpt(gameResponse.description[0] as string),
     image: gameResponse.image[0] || null,
     thumbnail: gameResponse.thumbnail[0] || null,
     yearPublished: getYearPublished(gameResponse),
@@ -29,9 +28,6 @@ export function transformGameResponse(
     artists: getLink("boardgameartist", metadata),
     publishers: getLink("boardgamepublisher", metadata),
     expansions: getLink("boardgameexpansion", metadata),
-    integrations: getLink("boardgameintegration", metadata),
-    accessories: getLink("boardgameaccessory", metadata),
-    families: getLink("boardgamefamily", metadata),
     statistics: getStatistics(gameResponse),
   };
 }
@@ -87,10 +83,6 @@ function getPlayerCountMax(gameResponse: BggGameResponse): number | null {
 
 function getTotalPlayTime(gameResponse: BggGameResponse): number | null {
   return Number(gameResponse.playingtime[0]?.$.value) ?? null;
-}
-
-function getExcerpt(description: string): string | null {
-  return description ? `${description.slice(0, 140)}...` : null;
 }
 
 function getYearPublished(gameResponse: BggGameResponse): string | null {
