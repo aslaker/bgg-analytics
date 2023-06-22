@@ -13,8 +13,8 @@ datasource db {
 
 model Game {
   id             Int         @id @default(autoincrement())
-  bggId          String
-  overallRank    Int
+  bggId          Int @unique
+  overallRank    Int?
   name           String
   description    String?
   image          String?
@@ -22,7 +22,7 @@ model Game {
   playerCountMin Int?
   playerCountMax Int?
   yearPublished  String?
-  totalPlayTime  String?
+  totalPlayTime  Int?
   familyRanks    Family[]
   mechanics      Mechanic[]
   categories     Category[]

@@ -104,7 +104,7 @@ export type BggGameResponse = {
 };
 
 export type ProcessedGame = {
-  id: number | null;
+  id: number;
   name: string | null;
   overallRank: number | null;
   familyRanks: Family[] | null;
@@ -115,11 +115,11 @@ export type ProcessedGame = {
   image: string | null;
   thumbnail: string | null;
   yearPublished: string | null;
-  mechanics: ProcessedLink[] | null;
-  categories: ProcessedLink[] | null;
-  designers: ProcessedLink[] | null;
-  artists: ProcessedLink[] | null;
-  publishers: ProcessedLink[] | null;
-  expansions: ProcessedLink[] | null;
+  mechanics: ProcessedLink[];
+  categories: ProcessedLink[];
+  designers: ProcessedLink[];
+  artists: ProcessedLink[];
+  publishers: ProcessedLink[];
+  expansions: ProcessedLink[];
   statistics: Statistics;
 };

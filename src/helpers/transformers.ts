@@ -32,7 +32,10 @@ export function transformGameResponse(
   };
 }
 
-function getLink(type: string, links: ParsedLink[] | null) {
+function getLink(
+  type: string,
+  links: ParsedLink[] | null
+): { id: string; value: string }[] {
   if (links === null) return [];
   return links
     .filter((linkItem) => linkItem.$.type === type)
